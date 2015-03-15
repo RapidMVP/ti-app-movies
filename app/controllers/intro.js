@@ -20,27 +20,24 @@ function init() {
 	
 	$.window.removeEventListener('open', init);
 	
-	var animation = Ti.UI.createAnimation({
-		transform: Ti.UI.create2DMatrix({rotate: -10}),
-		curve: Ti.UI.ANIMATION_CURVE_EASE_IN,
-		duration: 1000
+	var animation1 = Ti.UI.createAnimation({
+    	transform : Ti.UI.create2DMatrix({
+        		rotate : -10
+    	}),
+    	curve : Ti.UI.ANIMATION_CURVE_EASE_IN,
+    	duration : 1000
 	});
-	animation.addEventListener('complete', function(e){
-		var animation = Ti.UI.createAnimation({
-			transform: Ti.UI.create2DMatrix({rotate: 11.3}),
-			duration: 200
-		});
-		animation.addEventListener('complete', function(e){
-			_animationComplete = true;
-			if (_animateOutOnComplete) {
-				animateOut();
-			} else {
-				$.activity_indicator.show();
-			}
-		});
-		$.clapper_top_container.animate(animation);
+	var animation2 = Ti.UI.createAnimation({
+    	transform : Ti.UI.create2DMatrix({
+        		rotate : 11.3
+    	}),
+    	duration : 200
 	});
-	$.clapper_top_container.animate(animation);
+
+	animation.chainAnimate($.clapper_top_container, [animation1, animation2], function() {
+    	_animationComplete = true;
+    	(_animateOutOnComplete) ? animateOut() : $.activity_indicator.show();
+	});
 	
 }
 
