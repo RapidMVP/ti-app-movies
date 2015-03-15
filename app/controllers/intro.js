@@ -8,7 +8,7 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-
+var animation = require('alloy/animation');
 var _animateOutOnComplete = false;
 var _animationComplete = false;
 var _callback;
